@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal Design | Portfolio Concept</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Animación personalizada para la entrada suave */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans antialiased">
+
+    <!-- Navegación Refinada -->
+    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex justify-between items-center">
+            <span class="text-xl font-bold tracking-tighter uppercase">Nexus</span>
+            <div class="space-x-8 text-sm font-medium uppercase tracking-widest hidden md:flex">
+                <a href="#work" class="hover:text-blue-600 transition-colors">Proyectos</a>
+                <a href="#about" class="hover:text-blue-600 transition-colors">Estudio</a>
+                <a href="#contact" class="hover:text-blue-600 transition-colors">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section: Impacto Visual Minimalista -->
+    <header class="min-h-screen flex items-center justify-center pt-20">
+        <div class="max-w-4xl px-6 text-center reveal">
+            <h1 class="text-6xl md:text-8xl font-light tracking-tight leading-none mb-8">
+                Creamos experiencias <br> <span class="font-bold italic">digitales puras.</span>
+            </h1>
+            <p class="text-xl text-slate-500 font-light max-w-2xl mx-auto mb-10">
+                Soluciones web de alto impacto diseñadas con precisión técnica y estética minimalista.
+            </p>
+            <a href="#work" class="inline-block border-b-2 border-slate-900 pb-2 font-bold uppercase tracking-tighter hover:text-blue-600 hover:border-blue-600 transition-all">
+                Explorar portafolio
+            </a>
+        </div>
+    </header>
+
+    <!-- Grid de Proyectos Responsivo -->
+    <section id="work" class="py-32 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+                <!-- Tarjeta de Proyecto 1 -->
+                <div class="group cursor-pointer reveal">
+                    <div class="aspect-[4/5] bg-slate-100 overflow-hidden mb-6">
+                        <img src="https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&q=80&w=1000" 
+                             alt="Proyecto de diseño minimalista" 
+                             class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Interface 01</h3>
+                    <p class="text-slate-500 uppercase text-xs tracking-widest">UI/UX Design</p>
+                </div>
+
+                <!-- Tarjeta de Proyecto 2 -->
+                <div class="group cursor-pointer reveal md:mt-24">
+                    <div class="aspect-[4/5] bg-slate-100 overflow-hidden mb-6">
+                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=1000" 
+                             alt="Desarrollo técnico" 
+                             class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Core System</h3>
+                    <p class="text-slate-500 uppercase text-xs tracking-widest">Fullstack Development</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-20 border-t border-slate-100 text-center">
+        <p class="text-slate-400 text-sm">© 2026 Nexus Studio. "Keep it simple, but significant".</p>
+    </footer>
+
+    <!-- Hito 3: Interactividad -->
+    <script>
+        // Lógica para revelar elementos al hacer scroll (A11y friendly)
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
