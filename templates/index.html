@@ -1,95 +1,14 @@
-<!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus | Minimal Design</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Animación de entrada suave personalizada */
-        .reveal { opacity: 0; transform: translateY(20px); transition: all 0.8s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-    </style>
-</head>
-<body class="bg-white text-slate-900 font-sans antialiased">
+<nav class="fixed w-full z-50 bg-white/80 backdrop-blur-sm border-b border-slate-100">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex justify-between items-center">
+        <span class="font-bold tracking-tighter text-xl">MINIMAL.</span>
+        <a href="#contact" class="text-xs font-bold uppercase tracking-widest bg-slate-900 text-white px-4 py-2 hover:bg-slate-700 transition-colors">Contacto</a>
+    </div>
+</nav>
 
-    <!-- Navegación Minimalista -->
-    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-sm border-b border-slate-100">
-        <div class="max-w-5xl mx-auto px-6 h-20 flex justify-between items-center">
-            <span class="text-xl font-black tracking-tighter uppercase">Nexus</span>
-            <a href="#contact" class="text-sm font-bold border border-slate-900 px-5 py-2 hover:bg-slate-900 hover:text-white transition-all">Contacto</a>
-        </div>
-    </nav>
-
-    <!-- Hero Section con Animación -->
-    <section class="min-h-screen flex items-center justify-center pt-20">
-        <div class="max-w-3xl px-6 text-center reveal">
-            <h1 class="text-5xl md:text-8xl font-light leading-none mb-6">Menos es <span class="font-bold">mejor.</span></h1>
-            <p class="text-slate-500 text-lg mb-10 max-w-xl mx-auto">Interfaces diseñadas con precisión técnica y estética pura. Sin ruido, solo resultados.</p>
-        </div>
-    </section>
-
-    <!-- Formulario con Estilo Moderno -->
-    <section id="contact" class="py-32 bg-slate-50">
-        <div class="max-w-lg mx-auto px-6 reveal">
-            <h2 class="text-3xl font-bold mb-8">Inicia el flujo.</h2>
-            <form id="contactForm" class="space-y-6">
-                <div>
-                    <label for="email" class="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Email corporativo</label>
-                    <input type="email" id="email" required class="w-full border-b-2 border-slate-200 bg-transparent py-3 focus:border-slate-900 outline-none transition-colors">
-                </div>
-                <div>
-                    <label for="message" class="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Mensaje</label>
-                    <textarea id="message" rows="4" required class="w-full border-b-2 border-slate-200 bg-transparent py-3 focus:border-slate-900 outline-none transition-colors"></textarea>
-                </div>
-                <button type="submit" class="w-full bg-slate-900 text-white font-bold py-4 hover:bg-slate-800 transition-all uppercase tracking-widest text-xs">Transmitir Datos</button>
-                <p id="feedback" class="text-center text-sm font-medium hidden"></p>
-            </form>
-        </div>
-    </section>
-
-    <!-- JavaScript: Animaciones y Petición API -->
-    <script>
-        // 1. Observer para animaciones vistosas al hacer scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('active');
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-        // 2. Lógica del formulario (Fetch asíncrono)
-        document.getElementById('contactForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const feedback = document.getElementById('feedback');
-            const data = {
-                email: document.getElementById('email').value,
-                message: document.getElementById('message').value
-            };
-
-            try {
-                const response = await fetch('/api/contact', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify(data)
-                });
-                const result = await response.json();
-                
-                feedback.classList.remove('hidden', 'text-red-500', 'text-green-500');
-                if (response.ok) {
-                    feedback.textContent = result.success;
-                    feedback.classList.add('text-green-500');
-                    e.target.reset();
-                } else {
-                    feedback.textContent = result.error;
-                    feedback.classList.add('text-red-500');
-                }
-            } catch (err) {
-                feedback.textContent = "Error de conexión con el servidor.";
-                feedback.classList.add('text-red-500');
-            }
-        });
-    </script>
-</body>
-</html>
+<!-- Hero Section con clase para animación -->
+<header class="h-screen flex items-center justify-center pt-16">
+    <div class="text-center reveal">
+        <h1 class="text-5xl md:text-7xl font-light mb-4">Diseño con <span class="font-bold">propósito.</span></h1>
+        <p class="text-slate-500 max-w-lg mx-auto">Interfaces limpias, código robusto y arquitectura profesional.</p>
+    </div>
+</header>
