@@ -1,14 +1,202 @@
-<nav class="fixed w-full z-50 bg-white/80 backdrop-blur-sm border-b border-slate-100">
-    <div class="max-w-6xl mx-auto px-6 h-16 flex justify-between items-center">
-        <span class="font-bold tracking-tighter text-xl">MINIMAL.</span>
-        <a href="#contact" class="text-xs font-bold uppercase tracking-widest bg-slate-900 text-white px-4 py-2 hover:bg-slate-700 transition-colors">Contacto</a>
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus | Diseño & Arquitectura</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Estilos para animaciones de revelado */
+        .reveal { 
+            opacity: 0; 
+            transform: translateY(30px); 
+            transition: all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1); 
+        }
+        .reveal.active { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+        
+        /* Glassmorphism para el Navbar */
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="bg-white text-slate-900 font-sans antialiased">
+    <div class="fixed top-0 left-0 w-full h-full -z-10 overflow-hidden pointer-events-none">
+    <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-100/40 rounded-full blur-[120px] animate-blob"></div>
+    <div class="absolute bottom-[10%] right-[-5%] w-[30%] h-[35%] bg-purple-100/30 rounded-full blur-[100px] animate-blob animation-delay-2000"></div>
+</div>
+
+<style>
+    @keyframes blob {
+        0% { transform: translate(0px, 0px) scale(1); }
+        33% { transform: translate(30px, -50px) scale(1.1); }
+        66% { transform: translate(-20px, 20px) scale(0.9); }
+        100% { transform: translate(0px, 0px) scale(1); }
+    }
+    .animate-blob {
+        animation: blob 7s infinite;
+    }
+    .animation-delay-2000 {
+        animation-delay: 2s;
+    }
+</style>
+
+    <nav class="fixed w-full z-50 transition-all duration-500 border-b border-white/10 bg-white/40 backdrop-blur-xl">
+    <div class="max-w-6xl mx-auto px-6 h-20 flex justify-between items-center">
+        <span class="text-xl font-black tracking-tighter uppercase">Nexus<span class="animate-pulse text-blue-600">.</span></span>
+        <div class="hidden md:flex space-x-10 text-[10px] font-bold uppercase tracking-[0.3em]">
+            <a href="#inicio" class="hover:text-blue-600 transition-all">Inicio</a>
+            <a href="#proyectos" class="hover:text-blue-600 transition-all">Proyectos</a>
+            <a href="#contacto" class="hover:text-blue-600 transition-all">Contacto</a>
+        </div>
     </div>
 </nav>
 
-<!-- Hero Section con clase para animación -->
-<header class="h-screen flex items-center justify-center pt-16">
-    <div class="text-center reveal">
-        <h1 class="text-5xl md:text-7xl font-light mb-4">Diseño con <span class="font-bold">propósito.</span></h1>
-        <p class="text-slate-500 max-w-lg mx-auto">Interfaces limpias, código robusto y arquitectura profesional.</p>
+    <section id="inicio" class="min-h-screen flex items-center justify-center pt-20 px-6">
+        <div class="max-w-4xl text-center reveal">
+            <h1 class="text-6xl md:text-8xl font-light tracking-tight leading-none mb-8">
+                Diseño que <br><span class="font-bold italic">respira.</span>
+            </h1>
+            <p class="text-xl text-slate-400 font-light max-w-2xl mx-auto mb-12">
+                Arquitectura de software limpia aplicada a interfaces minimalistas de alto impacto.
+            </p>
+            <a href="#proyectos" class="inline-block border-b-2 border-slate-900 pb-2 font-bold uppercase tracking-widest text-sm hover:text-blue-600 hover:border-blue-600 transition-all">
+                Ver portafolio
+            </a>
+        </div>
+    </section>
+
+    <section id="proyectos" class="py-32 bg-slate-50">
+        <div class="group relative p-4 rounded-2xl bg-white/5 border border-white/20 backdrop-blur-sm shadow-xl reveal">
+    <div class="aspect-video bg-slate-200 overflow-hidden rounded-xl mb-6 relative">
+        <img 
+            src="https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?q=80&w=1000" 
+            alt="Descripción del proyecto"
+            loading="lazy" 
+            decoding="async"
+            class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700 opacity-0 onload-fade-in"
+            onload="this.style.opacity='1'"
+        >
     </div>
-</header>
+    <div class="px-2">
+        <h3 class="text-2xl font-bold italic">Concepto 01</h3>
+        <p class="text-slate-500 uppercase text-[10px] tracking-widest mt-2">Optimizado para Rendimiento</p>
+    </div>
+</div>
+                    <h3 class="text-2xl font-bold italic">Sistemas Core</h3>
+                    <p class="text-slate-500 uppercase text-xs tracking-widest mt-2">Desarrollo Backend</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="py-32 bg-white">
+        <div class="max-w-xl mx-auto px-6 reveal">
+            <h2 class="text-4xl font-light mb-2 text-center text-slate-400 italic">Contacto</h2>
+            <h3 class="text-3xl font-bold mb-12 text-center">Iniciemos una conversación.</h3>
+            
+           <form id="contactForm" class="space-y-8" aria-labelledby="contact-title">
+    <h3 id="contact-title" class="sr-only">Formulario de contacto</h3>
+    
+    <div class="relative">
+        <input type="email" id="email" name="email" placeholder=" " required
+            aria-required="true"
+            class="peer w-full border-b-2 border-slate-200 py-3 outline-none focus:border-blue-600 focus:ring-0 transition-colors bg-transparent">
+        <label for="email" class="absolute left-0 top-3 text-slate-400 pointer-events-none transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-blue-600 peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs uppercase font-bold tracking-widest">
+            Email Corporativo
+        </label>
+    </div>
+    
+    <div class="relative">
+        <textarea id="message" name="message" rows="4" placeholder=" " required
+            aria-required="true"
+            class="peer w-full border-b-2 border-slate-200 py-3 outline-none focus:border-blue-600 focus:ring-0 transition-colors bg-transparent"></textarea>
+        <label for="message" class="absolute left-0 top-3 text-slate-400 pointer-events-none transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-blue-600 peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs uppercase font-bold tracking-widest">
+            Mensaje
+        </label>
+    </div>
+    
+    <button type="submit" 
+        aria-live="polite"
+        class="w-full bg-slate-900 text-white font-bold py-5 hover:bg-blue-600 focus:ring-4 focus:ring-blue-200 outline-none transition-all uppercase tracking-widest text-xs">
+        <span id="buttonText">Transmitir Datos</span>
+    </button>
+    
+    <p id="feedback" role="alert" class="text-center font-bold text-sm hidden"></p>
+</form>
+        </div>
+    </section>
+
+    <footer class="py-20 text-center border-t border-slate-100">
+        <p class="text-slate-400 text-xs tracking-widest uppercase">© 2026 Nexus Studio. "Keep it simple".</p>
+    </footer>
+
+    <script>
+        // 1. Lógica de Revelado (Intersection Observer)
+        // Configuración avanzada del Observer
+const observerOptions = {
+    root: null, // relativo al viewport
+    rootMargin: '0px 0px -50px 0px', // se activa 50px antes de entrar para mayor fluidez
+    threshold: 0.15 
+};
+
+const smartReveal = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            // Añadimos la clase de animación
+            entry.target.classList.add('active');
+            
+            // Una vez revelado, dejamos de observar este elemento para liberar memoria
+            observer.unobserve(entry.target);
+            
+            console.log("%c INFO: Elemento optimizado revelado.", "color: #3b82f6; font-size: 10px;");
+        }
+    });
+}, observerOptions);
+
+// Aplicamos a todos los elementos con la clase .reveal
+document.querySelectorAll('.reveal').forEach(el => smartReveal.observe(el));
+
+        // 2. Conexión asíncrona con el Backend (API SRP)
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const feedback = document.getElementById('feedback');
+            const data = {
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value
+            };
+
+            feedback.classList.remove('hidden', 'text-red-500', 'text-green-600');
+            feedback.textContent = "Transmitiendo...";
+            feedback.classList.add('block');
+
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    feedback.textContent = result.success;
+                    feedback.classList.add('text-green-600');
+                    e.target.reset();
+                } else {
+                    feedback.textContent = result.error;
+                    feedback.classList.add('text-red-500');
+                }
+            } catch (err) {
+                feedback.textContent = "Error de conexión con el servidor Flask.";
+                feedback.classList.add('text-red-500');
+            }
+        });
+    </script>
+</body>
+</html>

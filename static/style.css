@@ -1,0 +1,27 @@
+.onload-fade-in {
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Evita que los elementos 'reveal' ocupen espacio extra antes de animarse */
+.reveal {
+    will-change: transform, opacity;
+}
+/* Estilo de enfoque para accesibilidad (Focus ring) */
+a:focus-visible, button:focus-visible {
+    outline: 2px solid #2563eb;
+    outline-offset: 4px;
+    border-radius: 2px;
+}
+
+/* Ocultar elementos visualmente pero mantenerlos para lectores de pantalla */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}

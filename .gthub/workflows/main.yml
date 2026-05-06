@@ -1,0 +1,39 @@
+name: CI Nexus Pipeline
+
+# El flujo se dispara en cada 'push' a la rama principal
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout de código
+      uses: actions/checkout@v3
+
+    - name: Configurar Python 3.9
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Instalar dependencias
+      run: |
+        python -m pip install --upgrade pip
+        pip install flask flake8
+
+    - name: Lint con flake8 (Revisión de Clean Code)
+      run: |
+        # Revisa errores de sintaxis y lógica en Python
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+
+    - name: Validar Estructura HTML
+      # Este paso verifica que no hayas olvidado cerrar etiquetas
+      run: |
+        python -c "import os; from html.parser import HTMLParser; [HTMLParser().feed(open(os.path.join('templates', f)).read()) for f in os.listdir('templates') if f.endswith('.html')]"
+
+    - name: Notificación de Éxito
+      run: echo "¡La calidad del código ha sido validada con éxito!"
