@@ -1,6 +1,8 @@
 /* Estilo tipográfico inspirado en Apple (San Francisco) */
 :root {
     --apple-font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --apple-ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+    --apple-ease-out: cubic-bezier(0, 0, 0.1, 1);
 }
 
 body {
@@ -18,12 +20,48 @@ body {
     will-change: transform, opacity;
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.8s cubic-bezier(0.5, 0, 0, 1), transform 0.8s cubic-bezier(0.5, 0, 0, 1);
+    transition: opacity 0.8s var(--apple-ease), transform 0.8s var(--apple-ease);
 }
 
 .reveal.active {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Efecto de aparición premium tipo Apple: Blur + Fade-in Up + GPU Accel */
+.reveal-blur {
+    will-change: opacity, transform, filter;
+    opacity: 0;
+    filter: blur(12px);
+    /* translate3d fuerza la renderización en la tarjeta gráfica (GPU) */
+    transform: translateY(40px) translate3d(0,0,0);
+    transition: opacity 1.2s var(--apple-ease), filter 1.2s var(--apple-ease), transform 1.2s var(--apple-ease);
+}
+
+.reveal-blur.active {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0) translate3d(0,0,0);
+}
+
+/* Base para el motor de Scroll-Telling que usaremos en la Fase 2 */
+.scroll-telling-section {
+    position: relative;
+    /* El alto definirá cuánto tiempo el usuario scrollea mientras ve la animación */
+    height: 400vh; 
+}
+
+.sticky-viewport {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    will-change: transform, opacity;
 }
 
 /* Estilo de enfoque para accesibilidad (Focus ring) */
