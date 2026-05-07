@@ -48,6 +48,59 @@
         </div>
     </main>
 
+    <!-- Sección de Características (Fade-in Up con Stagger) -->
+    <section class="py-32 px-4 max-w-7xl mx-auto relative z-10 bg-black">
+        <div class="text-center mb-20 reveal-blur" style="transition-delay: 0.1s;">
+            <h3 class="text-4xl md:text-6xl font-bold tracking-tight mb-4">Innovación en cada capa.</h3>
+            <p class="text-xl md:text-2xl text-gray-400 font-medium">Diseñado para la máxima eficiencia y velocidad.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-[#1c1c1e]/60 backdrop-blur-[20px] border border-white/10 p-10 rounded-3xl reveal-blur hover:bg-[#2c2c2e]/80 transition-colors duration-500" style="transition-delay: 0.2s;">
+                <div class="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center mb-6 text-blue-400">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h4 class="text-2xl font-bold mb-3 tracking-tight">Rendimiento</h4>
+                <p class="text-gray-400 leading-relaxed font-medium">Optimizaciones a 60fps usando aceleración por hardware y un uso riguroso de la GPU.</p>
+            </div>
+            
+            <div class="bg-[#1c1c1e]/60 backdrop-blur-[20px] border border-white/10 p-10 rounded-3xl reveal-blur hover:bg-[#2c2c2e]/80 transition-colors duration-500" style="transition-delay: 0.4s;">
+                <div class="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center mb-6 text-purple-400">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                </div>
+                <h4 class="text-2xl font-bold mb-3 tracking-tight">Seguridad</h4>
+                <p class="text-gray-400 leading-relaxed font-medium">Cifrado de extremo a extremo, enrutamiento seguro y arquitecturas Zero Trust.</p>
+            </div>
+            
+            <div class="bg-[#1c1c1e]/60 backdrop-blur-[20px] border border-white/10 p-10 rounded-3xl reveal-blur hover:bg-[#2c2c2e]/80 transition-colors duration-500" style="transition-delay: 0.6s;">
+                <div class="w-12 h-12 bg-indigo-500/20 rounded-full flex items-center justify-center mb-6 text-indigo-400">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                </div>
+                <h4 class="text-2xl font-bold mb-3 tracking-tight">Escalabilidad</h4>
+                <p class="text-gray-400 leading-relaxed font-medium">Nodos elásticos en la nube. Crece horizontalmente sin degradar la experiencia.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Interactiva Scroll-Telling (Sticky Viewport Apple-Style) -->
+    <section class="scroll-telling-section bg-black">
+        <div class="sticky-viewport">
+            <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+                <div class="parallax-scale border border-white/10 bg-[#1c1c1e]/40 backdrop-blur-[20px] rounded-[3rem] w-72 h-72 md:w-[400px] md:h-[400px] flex flex-col items-center justify-center shadow-[0_0_120px_rgba(37,99,235,0.15)]">
+                    <div class="w-32 h-32 bg-blue-500/20 blur-3xl absolute rounded-full"></div>
+                    <span class="text-3xl font-semibold tracking-widest text-blue-400 relative z-10">CORE</span>
+                </div>
+            </div>
+            
+            <div class="z-10 text-center max-w-5xl px-4 flex flex-col items-center justify-center h-full w-full absolute inset-0 pointer-events-none scroll-reveal-text">
+                <h2 class="text-6xl md:text-8xl font-bold tracking-tighter text-white mb-6">El centro de todo.</h2>
+                <p class="text-2xl md:text-4xl text-gray-400 font-medium max-w-3xl leading-tight">
+                    Un ecosistema hiperconectado donde el hardware y el software se fusionan de manera invisible.
+                </p>
+            </div>
+        </div>
+    </section>
+
     <!-- Formulario de Contacto -->
     <section id="contacto" class="max-w-md mx-auto py-32 px-4 reveal">
         <div class="text-center mb-10">

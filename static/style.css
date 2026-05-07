@@ -64,6 +64,22 @@ body {
     will-change: transform, opacity;
 }
 
+/* Efectos de hardware acelerado atados al Scroll (Fase 2) */
+.parallax-scale {
+    will-change: transform, opacity;
+    /* Escala y se desplaza sutilmente en 3D basándose en el progreso del scroll */
+    transform: scale(calc(1 + (var(--scroll-progress, 0) * 1.5))) translate3d(0, calc(var(--scroll-progress, 0) * -40px), 0);
+    opacity: clamp(0, calc(1 - (var(--scroll-progress, 0) * 1.5)), 1);
+}
+
+.scroll-reveal-text {
+    will-change: transform, opacity, filter;
+    /* Fade-in up y Blur-out controlados de forma fluida y matemática por el scroll */
+    opacity: clamp(0, calc((var(--scroll-progress, 0) - 0.4) * 3), 1);
+    transform: translate3d(0, calc( clamp(0, 1 - (var(--scroll-progress, 0) - 0.4) * 3, 1) * 60px ), 0);
+    filter: blur(calc( clamp(0, 1 - (var(--scroll-progress, 0) - 0.4) * 3, 1) * 12px ));
+}
+
 /* Estilo de enfoque para accesibilidad (Focus ring) */
 a:focus-visible, button:focus-visible {
     outline: 2px solid #2563eb;
