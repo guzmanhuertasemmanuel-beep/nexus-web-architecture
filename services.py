@@ -66,3 +66,61 @@ class AdminService:
         except sqlite3.Error as e:
             print(f"Error de lectura en DB: {e}")
             return {"error": "Error interno del servidor de datos."}, 500
+        # Añadir esta clase al final de services.py
+
+class NexusNodeService:
+    """Servicio encargado de gestionar la recuperación de nodos temáticos (páginas random)."""
+    
+    @staticmethod
+    def init_nodes_db():
+        """Inicializa la tabla de nodos y la puebla con datos base si está vacía."""
+        with sqlite3.connect('nexus.db') as conn:
+            conn.execute('''
+                CREATE TABLE IF NOT EXISTS nexus_nodes (
+                    id TEXT PRIMARY KEY,
+                    title TEXT NOT NULL,
+                    description TEXT NOT NULL,
+                    theme TEXT NOT NULL
+                )
+            ''')
+            
+            # Sembrar datos iniciales si la tabla está vacía
+            cursor = conn.cursor()
+            cursor.execute("SELECT COUNT(*) FROM nexus_nodes")
+            if cursor.fetchone()[0] == 0:
+                nodes = [
+                    ('dev-ops', 'DevOps & CI/CD', 'Automatización de despliegues y metodologías ágiles de integración continua.', 'black'),
+                    ('cloud-computing', 'Cloud Computing', 'Diseño de sistemas distribuidos y arquitecturas elásticas en AWS y Azure.', 'blue'),
+                    ('ai-ml', 'Inteligencia Artificial', 'Desarrollo de Modelos de Lenguaje, Redes Neuronales y Machine Learning.', 'slate')
+                ]
+                cursor.executemany("INSERT INTO nexus_nodes (id, title, description, theme) VALUES (?, ?, ?, ?)", nodes)
+                print("Log Profesional: Tabla 'nexus_nodes' poblada con éxito.")
+
+    @staticmethod
+    def get_random_node_url():
+        """Obtiene un ID aleatorio directo desde SQLite."""
+        try:
+            with sqlite3.connect('nexus.db') as conn:
+                cursor = conn.cursor()
+                # Función nativa de SQLite para aleatoriedad
+                cursor.execute("SELECT id FROM nexus_nodes ORDER BY RANDOM() LIMIT 1")
+                row = cursor.fetchone()
+                selected_node = row[0] if row else 'dev-ops'
+            return f"/node/{selected_node}"
+        except sqlite3.Error as e:
+            print(f"Error DB: {e}")
+            return "/node/error"
+
+    @staticmethod
+    def get_node_data(node_id):
+        """Obtiene la información de un nodo específico."""
+        try:
+            with sqlite3.connect('nexus.db') as conn:
+                conn.row_factory = sqlite3.Row
+                cursor = conn.cursor()
+                cursor.execute("SELECT * FROM nexus_nodes WHERE id = ?", (node_id,))
+                row = cursor.fetchone()
+                return dict(row) if row else None
+        except sqlite3.Error as e:
+            print(f"Error DB Nodes: {e}")
+            return None

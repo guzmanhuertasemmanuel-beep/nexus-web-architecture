@@ -1,444 +1,75 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus | Diseño & Arquitectura</title>
+    <title>Nexus | Arquitectura Web</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Estilos para animaciones de revelado */
-        .reveal { 
-            opacity: 0; 
-            transform: translateY(30px); 
-            transition: all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1); 
-        }
-        .reveal.active { 
-            opacity: 1; 
-            transform: translateY(0); 
-        }
-        
-        /* Glassmorphism para el Navbar */
-        .glass {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-
-        /* Animación de los orbes de fondo */
-        @keyframes blob {
-            0% { transform: translate(0px, 0px) scale(1); }
-            33% { transform: translate(30px, -50px) scale(1.1); }
-            66% { transform: translate(-20px, 20px) scale(0.9); }
-            100% { transform: translate(0px, 0px) scale(1); }
-        }
-        .animate-blob { animation: blob 7s infinite; }
-        .animation-delay-2000 { animation-delay: 2s; }
-        
-        /* Suavizar la entrada de imágenes lazy */
-        .onload-fade-in { transition: opacity 0.5s ease-in-out; }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body class="bg-white text-slate-900 font-sans antialiased">
+<body class="bg-black text-white antialiased selection:bg-blue-500 selection:text-white">
     
-    <div class="fixed top-0 left-0 w-full h-full -z-10 overflow-hidden pointer-events-none">
-        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-100/40 rounded-full blur-[120px] animate-blob"></div>
-        <div class="absolute bottom-[10%] right-[-5%] w-[30%] h-[35%] bg-purple-100/30 rounded-full blur-[100px] animate-blob animation-delay-2000"></div>
-    </div>
-
-    <nav class="fixed w-full z-50 transition-all duration-500 border-b border-white/10 bg-white/40 backdrop-blur-xl">
-        <div class="max-w-6xl mx-auto px-6 h-20 flex justify-between items-center">
-<span id="nexusLogo" class="text-xl font-black tracking-tighter uppercase cursor-pointer select-none" aria-label="Abrir consola administrativa (Doble Clic)" title="Comando Secreto">Nexus<span class="animate-pulse text-blue-600">.</span></span>            <div class="hidden md:flex space-x-10 text-[10px] font-bold uppercase tracking-[0.3em]">
-                <a href="#inicio" class="hover:text-blue-600 transition-all">Inicio</a>
-                <a href="#capacidades" class="hover:text-blue-600 transition-all">Servicios</a>
-                <a href="#proyectos" class="hover:text-blue-600 transition-all">Proyectos</a>
-                <a href="#contacto" class="hover:text-blue-600 transition-all">Contacto</a>
+    <!-- Navbar con Glassmorphism -->
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300 backdrop-blur-xl bg-black/50 border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-14">
+                <span class="font-semibold text-xl tracking-wide text-gray-100 cursor-pointer hover:text-white transition">Nexus</span>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8 text-xs font-medium tracking-wide text-gray-300">
+                        <a href="https://github.com" target="_blank" class="hover:text-white transition-colors">GitHub</a>
+                        <a href="https://developer.mozilla.org" target="_blank" class="hover:text-white transition-colors">MDN</a>
+                        <a href="https://stackoverflow.com" target="_blank" class="hover:text-white transition-colors">Stack Overflow</a>
+                        <a href="#contacto" class="hover:text-white transition-colors">Contacto</a>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
 
-    <section id="inicio" class="min-h-screen flex items-center justify-center pt-20 px-6">
-        <div class="max-w-4xl text-center reveal">
-            <h1 class="text-6xl md:text-8xl font-light tracking-tight leading-none mb-8">
-                Diseño que <br><span class="font-bold italic">respira.</span>
-            </h1>
-            <p class="text-xl text-slate-400 font-light max-w-2xl mx-auto mb-12">
-                Arquitectura de software limpia aplicada a interfaces minimalistas de alto impacto.
-            </p>
-            <a href="#capacidades" class="inline-block border-b-2 border-slate-900 pb-2 font-bold uppercase tracking-widest text-sm hover:text-blue-600 hover:border-blue-600 transition-all">
-                Descubrir Sistema
+    <!-- Hero Section -->
+    <main class="flex flex-col items-center justify-center min-h-screen text-center px-4 pt-20">
+        <h1 class="text-6xl md:text-8xl font-bold tracking-tighter mb-4 reveal onload-fade-in">Arquitectura Web.</h1>
+        <h2 class="text-4xl md:text-6xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 tracking-tight mb-8 reveal">Reimaginada para el futuro.</h2>
+        <p class="mt-4 text-xl text-gray-400 max-w-2xl mx-auto mb-12 reveal font-medium">
+            Explora el ecosistema de Tecnologías de la Información. Una experiencia fluida, rápida y diseñada con extrema atención al detalle.
+        </p>
+        
+        <!-- Botones con diseño estilo Apple -->
+        <div class="flex flex-col sm:flex-row gap-6 reveal">
+            <a href="https://developer.mozilla.org/" target="_blank" class="bg-white text-black font-semibold text-lg py-4 px-10 rounded-full hover:scale-105 transition-transform duration-300 shadow-lg shadow-white/10">
+                Explorar MDN Docs
+            </a>
+            <a href="https://github.com/explore" target="_blank" class="bg-[#1c1c1e] text-white font-semibold text-lg py-4 px-10 rounded-full hover:scale-105 transition-transform duration-300 border border-white/10 shadow-lg shadow-black/50">
+                Descubrir GitHub
+            </a>
+            <a href="/explore/random" class="bg-blue-600 text-white font-semibold text-lg py-4 px-10 rounded-full hover:scale-105 hover:bg-blue-500 transition-all duration-300 shadow-lg shadow-blue-500/25">
+                Conectar a Nodos IT
             </a>
         </div>
-    </section>
+    </main>
 
-    <section id="capacidades" class="py-32 bg-white relative">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="mb-16 reveal">
-                <h2 class="text-xs font-bold tracking-[0.4em] text-blue-600 uppercase mb-4">Core Capabilities</h2>
-                <p class="text-4xl font-light italic">Soluciones de <span class="font-bold">alto rendimiento.</span></p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="p-8 border border-slate-100 rounded-2xl hover:border-blue-600/30 hover:bg-slate-50 hover:shadow-2xl transition-all duration-500 group reveal">
-                    <div class="w-12 h-12 bg-slate-900 text-white flex items-center justify-center rounded-lg mb-6 group-hover:bg-blue-600 transition-colors duration-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4 group-hover:text-blue-600 transition-colors">Arquitectura SRP</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">Backend modular en Flask que garantiza escalabilidad y facilidad de mantenimiento con Clean Code.</p>
-                </div>
-
-                <div class="p-8 border border-slate-100 rounded-2xl hover:border-blue-600/30 hover:bg-slate-50 hover:shadow-2xl transition-all duration-500 group reveal" style="transition-delay: 100ms;">
-                    <div class="w-12 h-12 bg-slate-900 text-white flex items-center justify-center rounded-lg mb-6 group-hover:bg-blue-600 transition-colors duration-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4 group-hover:text-blue-600 transition-colors">CI/CD Pipeline</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">Flujo de integración continua mediante GitHub Actions para entregas de código validadas y sin errores.</p>
-                </div>
-
-                <div class="p-8 border border-slate-100 rounded-2xl hover:border-blue-600/30 hover:bg-slate-50 hover:shadow-2xl transition-all duration-500 group reveal" style="transition-delay: 200ms;">
-                    <div class="w-12 h-12 bg-slate-900 text-white flex items-center justify-center rounded-lg mb-6 group-hover:bg-blue-600 transition-colors duration-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4 group-hover:text-blue-600 transition-colors">Mobile First</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">Experiencia fluida y accesible (AA) en cualquier dispositivo con optimización de carga perezosa.</p>
-                </div>
-            </div>
+    <!-- Formulario de Contacto -->
+    <section id="contacto" class="max-w-md mx-auto py-32 px-4 reveal">
+        <div class="text-center mb-10">
+            <h3 class="text-3xl font-bold tracking-tight mb-3">Mantente en contacto.</h3>
+            <p class="text-gray-400">Envíanos un mensaje cifrado a través de nuestra red.</p>
         </div>
-    </section>
-
-    <section class="py-24 bg-slate-900 text-white relative overflow-hidden">
-        <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-12 text-center relative z-10">
-            <div class="reveal">
-                <span class="text-5xl font-black block mb-2"><span class="counter" data-target="99">0</span>.9%</span>
-                <span class="text-xs uppercase tracking-widest text-slate-400">Uptime</span>
-            </div>
-            <div class="reveal" style="transition-delay: 100ms;">
-                <span class="text-5xl font-black block mb-2"><span class="counter" data-target="45">0</span>ms</span>
-                <span class="text-xs uppercase tracking-widest text-slate-400">Latencia</span>
-            </div>
-            <div class="reveal" style="transition-delay: 200ms;">
-                <span class="text-5xl font-black block mb-2"><span class="counter" data-target="100">0</span></span>
-                <span class="text-xs uppercase tracking-widest text-slate-400">QA Score</span>
-            </div>
-            <div class="reveal" style="transition-delay: 300ms;">
-                <span class="text-5xl font-black block mb-2"><span class="counter" data-target="256">0</span>-bit</span>
-                <span class="text-xs uppercase tracking-widest text-slate-400">Encriptación</span>
-            </div>
-        </div>
-    </section>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
-                <!-- Proyecto 01 -->
-                <article class="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 transition-all hover:shadow-2xl reveal">
-                    <div class="relative aspect-video overflow-hidden rounded-xl bg-slate-100">
-                        <!-- Overlay interactivo -->
-                        <div class="absolute inset-0 z-10 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-slate-900/20 backdrop-blur-sm">
-                            <span class="rounded-full bg-white px-6 py-2 text-xs font-bold uppercase tracking-widest text-slate-900 shadow-xl" aria-hidden="true">Explorar</span>
-                        </div>
-                        <img src="https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?q=80&w=1000" alt="Interfaz de usuario minimalista para Fintech" loading="lazy" decoding="async" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0">
-                    </div>
-                    <div class="mt-6 flex justify-between items-end">
-                        <div>
-                            <p class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600">Fintech v2.0</p>
-                            <h3 class="text-xl font-light italic text-slate-900">Concepto <span class="font-bold">01</span></h3>
-                        </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-300 transition-colors group-hover:text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                    </div>
-                </article>
-
-                <!-- Proyecto 02 -->
-                <article class="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 transition-all hover:shadow-2xl reveal md:mt-20">
-                    <div class="relative aspect-video overflow-hidden rounded-xl bg-slate-100">
-                        <div class="absolute inset-0 z-10 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-slate-900/20 backdrop-blur-sm">
-                            <span class="rounded-full bg-white px-6 py-2 text-xs font-bold uppercase tracking-widest text-slate-900 shadow-xl" aria-hidden="true">Explorar</span>
-                        </div>
-                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1000" alt="Arquitectura de servidor y bases de datos" loading="lazy" decoding="async" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0">
-                    </div>
-                    <div class="mt-6 flex justify-between items-end">
-                        <div>
-                            <p class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600">Backend API</p>
-                            <h3 class="text-xl font-light italic text-slate-900">Sistemas <span class="font-bold">Core</span></h3>
-                        </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-300 transition-colors group-hover:text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                    </div>
-                </article>
-            </div>
-
-    <section id="contacto" class="py-32 bg-white">
         
-        <div class="max-w-3xl mx-auto px-6 mb-20 reveal">
-            <div class="bg-slate-900 rounded-xl overflow-hidden shadow-2xl font-mono text-xs md:text-sm">
-                <div class="bg-slate-800 px-4 py-3 flex gap-2 border-b border-slate-700">
-                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                </div>
-                <div class="p-6 text-green-400 space-y-3">
-                    <p class="opacity-70">> initializing nexus_system.core...</p>
-                    <p class="text-white">Status: <span class="text-blue-400">Ready to Connect</span></p>
-                    <p class="opacity-70">> loading_modules: [flask_api, auth, smtp_relay]</p>
-                    <p>> await user.input() <span class="animate-pulse text-white">_</span></p>
-                </div>
-            </div>
-        </div>
-
-        <div class="max-w-xl mx-auto px-6 reveal">
-            <h2 class="text-4xl font-light mb-2 text-center text-slate-400 italic">Contacto</h2>
-            <h3 class="text-3xl font-bold mb-12 text-center">Iniciemos una conversación.</h3>
+        <form id="contactForm" class="flex flex-col gap-5 bg-[#1c1c1e]/80 p-8 rounded-3xl border border-white/10 backdrop-blur-xl shadow-2xl">
+            <input type="email" id="email" placeholder="Correo electrónico" required class="bg-black/50 text-white border border-white/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all placeholder-gray-500 font-medium">
+            <textarea id="message" placeholder="Mensaje" required class="bg-black/50 text-white border border-white/10 rounded-2xl px-5 py-4 h-32 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all placeholder-gray-500 font-medium resize-none"></textarea>
             
-            <form id="contactForm" class="space-y-8" aria-labelledby="contact-title">
-                <h3 id="contact-title" class="sr-only">Formulario de contacto</h3>
-                
-                <div class="relative">
-                    <input type="email" id="email" name="email" placeholder=" " required aria-required="true" class="peer w-full border-b-2 border-slate-200 py-3 outline-none focus:border-blue-600 focus:ring-0 transition-colors bg-transparent font-medium">
-                    <label for="email" class="absolute left-0 top-3 text-slate-400 pointer-events-none transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-blue-600 peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs uppercase font-bold tracking-widest">
-                        Email Corporativo
-                    </label>
-                </div>
-                
-                <div class="relative">
-                    <textarea id="message" name="message" rows="4" placeholder=" " required aria-required="true" class="peer w-full border-b-2 border-slate-200 py-3 outline-none focus:border-blue-600 focus:ring-0 transition-colors bg-transparent font-medium"></textarea>
-                    <label for="message" class="absolute left-0 top-3 text-slate-400 pointer-events-none transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-blue-600 peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs uppercase font-bold tracking-widest">
-                        Mensaje
-                    </label>
-                </div>
-                
-                <button type="submit" aria-live="polite" class="w-full bg-slate-900 text-white font-bold py-5 rounded-xl hover:bg-blue-600 focus:ring-4 focus:ring-blue-200 hover:shadow-lg hover:shadow-blue-600/30 outline-none transition-all duration-300 uppercase tracking-widest text-xs">
-                    <span id="buttonText">Transmitir Datos</span>
-                </button>
-                
-                <p id="feedback" role="alert" class="text-center font-bold text-sm hidden p-4 rounded-lg bg-slate-50"></p>
-            </form>
-        </div>
+            <button type="submit" class="bg-white hover:bg-gray-200 text-black font-bold text-lg py-4 rounded-2xl transition-colors duration-300 mt-2">
+                <span id="buttonText">Enviar mensaje</span>
+            </button>
+            <p id="feedback" class="text-sm text-center mt-3 text-gray-400 font-medium h-5"></p>
+        </form>
     </section>
 
-    <footer class="py-12 bg-slate-50 text-center border-t border-slate-200">
-        <p class="text-slate-400 text-xs tracking-widest uppercase font-bold">© 2026 Nexus Studio. "Keep it simple, but significant".</p>
+    <footer class="text-center py-10 text-gray-500 text-sm border-t border-white/10">
+        <p>Copyright © 2026 Nexus Inc. Todos los derechos reservados.</p>
     </footer>
-<!-- Nexus Command Center Modal -->
-    <dialog id="adminModal" class="bg-transparent p-0 backdrop:bg-slate-900/80 backdrop:backdrop-blur-sm fixed inset-0 z-[100] m-auto w-full h-full flex-col items-center justify-center hidden open:flex">
-        <div class="w-full max-w-3xl bg-slate-900/80 backdrop-blur-2xl border border-slate-700 rounded-2xl shadow-2xl p-8 text-white transform transition-all">
-            
-            <header class="flex justify-between items-center mb-8 border-b border-slate-700 pb-4">
-                <h2 class="text-2xl font-light italic text-slate-300">Nexus <span class="font-bold text-white">Command Center</span></h2>
-                <button id="closeAdmin" class="text-slate-500 hover:text-white transition-colors outline-none focus:ring-2 focus:ring-blue-500 rounded-lg p-1" aria-label="Cerrar panel">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
-            </header>
 
-            <!-- Fase 1: Autenticación -->
-            <div id="adminLogin" class="flex flex-col gap-5">
-                <div class="relative">
-                    <label for="adminAuth" class="sr-only">Token de Seguridad</label>
-                    <input type="password" id="adminAuth" class="peer w-full bg-slate-800 border border-slate-600 rounded-xl px-4 py-4 text-white font-mono text-sm outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all" placeholder="Token de Sistema...">
-                </div>
-                <button id="authBtn" aria-live="polite" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl transition-all duration-300 uppercase tracking-widest text-xs outline-none focus:ring-2 focus:ring-blue-400">Desencriptar Datos</button>
-                <p id="adminFeedback" aria-live="assertive" class="text-red-400 text-xs text-center hidden font-mono mt-2"></p>
-            </div>
-
-            <!-- Fase 2: Visualización de Datos -->
-            <div id="adminDashboard" class="hidden flex-col gap-4 max-h-[50vh] overflow-y-auto pr-2">
-                <!-- Tarjetas de mensajes inyectadas dinámicamente -->
-            </div>
-
-        </div>
-    </dialog>
-    <script>
-        // 1. Lógica de Revelado (Intersection Observer para animaciones)
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px 0px -50px 0px',
-            threshold: 0.15 
-        };
-
-        const smartReveal = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.reveal').forEach(el => smartReveal.observe(el));
-
-        // NUEVO: 2. Animación de los Contadores Estadísticos
-        const counters = document.querySelectorAll('.counter');
-        const animateCounters = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const counter = entry.target;
-                    const target = +counter.getAttribute('data-target');
-                    const duration = 2000; // 2 segundos
-                    const increment = target / (duration / 16); // 60fps aprox
-                    
-                    let currentCount = 0;
-                    const updateCounter = () => {
-                        currentCount += increment;
-                        if (currentCount < target) {
-                            counter.innerText = Math.ceil(currentCount);
-                            requestAnimationFrame(updateCounter);
-                        } else {
-                            counter.innerText = target;
-                        }
-                    };
-                    updateCounter();
-                    observer.unobserve(counter);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        counters.forEach(counter => animateCounters.observe(counter));
-
-        // 3. Conexión asíncrona con el Backend (API SRP)
-        document.getElementById('contactForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const feedback = document.getElementById('feedback');
-            const buttonText = document.getElementById('buttonText');
-            const data = {
-                email: document.getElementById('email').value,
-                message: document.getElementById('message').value
-            };
-
-            // UI de Carga
-            feedback.classList.remove('hidden', 'text-red-600', 'text-green-600');
-            buttonText.textContent = "Procesando...";
-            
-            try {
-                const response = await fetch('/api/contact', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-                
-                const result = await response.json();
-                feedback.classList.add('block');
-                
-                if (response.ok) {
-                    feedback.textContent = result.success || "Datos transmitidos exitosamente.";
-                    feedback.classList.add('text-green-600');
-                    buttonText.textContent = "Mensaje Enviado";
-                    e.target.reset();
-                    setTimeout(() => buttonText.textContent = "Transmitir Datos", 3000);
-                } else {
-                    feedback.textContent = result.error || "Error en validación de datos.";
-                    feedback.classList.add('text-red-600');
-                    buttonText.textContent = "Reintentar";
-                }
-            } catch (err) {
-                feedback.classList.add('block', 'text-red-600');
-                feedback.textContent = "Error de red: El servidor backend (Flask) no está respondiendo.";
-                buttonText.textContent = "Error de Conexión";
-                
-            }
-        });
-
-        // 4. Lógica de Navbar Dinámico (Glassmorphism Smart)
-                const nav = document.querySelector('nav');
-        
-        window.addEventListener('scroll', () => {
-            // Se activa cuando el usuario baja más de 50px
-            if (window.scrollY > 50) {
-                nav.classList.add('py-2', 'bg-white/80', 'shadow-sm');
-                nav.classList.remove('bg-white/40');
-            } else {
-                nav.classList.add('bg-white/40');
-                nav.classList.remove('py-2', 'bg-white/80', 'shadow-sm');
-            }
-        }, { passive: true }); // passive: true optimiza el rendimiento del scroll
-        
-        // 5. Lógica del Nexus Command Center (Vanilla JS)
-        const nexusLogo = document.getElementById('nexusLogo');
-        const adminModal = document.getElementById('adminModal');
-        const closeAdmin = document.getElementById('closeAdmin');
-        const authBtn = document.getElementById('authBtn');
-        const adminLogin = document.getElementById('adminLogin');
-        const adminDashboard = document.getElementById('adminDashboard');
-        const adminFeedback = document.getElementById('adminFeedback');
-        const adminAuthInput = document.getElementById('adminAuth');
-
-        // Easter Egg: Doble clic para abrir el modal
-        nexusLogo.addEventListener('dblclick', () => {
-            adminModal.showModal();
-        });
-
-        // Limpieza de estado al cerrar
-        closeAdmin.addEventListener('click', () => {
-            adminModal.close();
-            setTimeout(() => {
-                adminLogin.classList.remove('hidden');
-                adminDashboard.classList.add('hidden');
-                adminDashboard.innerHTML = '';
-                adminFeedback.classList.add('hidden');
-                adminAuthInput.value = '';
-            }, 300); // Espera a que termine la animación de cierre nativa
-        });
-
-        // Fetch de datos con autenticación
-        authBtn.addEventListener('click', async () => {
-            const token = adminAuthInput.value.trim();
-            if (!token) return;
-
-            authBtn.textContent = 'Verificando...';
-            adminFeedback.classList.add('hidden');
-
-            try {
-                const response = await fetch('/api/admin/messages', {
-                    method: 'GET',
-                    headers: { 'X-Nexus-Auth': token }
-                });
-
-                const data = await response.json();
-
-                if (response.ok) {
-                    renderMessages(data.messages);
-                } else {
-                    showAdminError(data.error || 'Acceso Denegado');
-                }
-            } catch (err) {
-                showAdminError('Fallo de conexión con el núcleo.');
-            } finally {
-                authBtn.textContent = 'Desencriptar Datos';
-            }
-        });
-
-        function showAdminError(msg) {
-            adminFeedback.textContent = `> error: ${msg}`;
-            adminFeedback.classList.remove('hidden');
-        }
-
-        // Renderizado Dinámico de HTML Seguro
-        function renderMessages(messages) {
-            adminLogin.classList.add('hidden');
-            adminDashboard.classList.remove('hidden');
-            adminDashboard.classList.add('flex');
-
-            if (messages.length === 0) {
-                adminDashboard.innerHTML = `<p class="text-slate-400 font-mono text-xs">> sys.status: Sin transmisiones en la base de datos.</p>`;
-                return;
-            }
-
-            // Uso de template literals para inyectar componentes Tailwind UI
-            adminDashboard.innerHTML = messages.map(msg => `
-                <div class="bg-slate-800/50 border border-slate-700 p-5 rounded-xl hover:border-blue-500/50 transition-colors">
-                    <div class="flex justify-between items-center mb-3">
-                        <span class="text-blue-400 text-xs font-bold font-mono">${escapeHTML(msg.email)}</span>
-                        <span class="text-slate-500 text-[10px] tracking-wider">${new Date(msg.date).toLocaleDateString()}</span>
-                    </div>
-                    <p class="text-slate-300 text-sm font-light leading-relaxed">${escapeHTML(msg.message)}</p>
-                </div>
-            `).join('');
-        }
-
-        // Prevención básica de XSS al renderizar en el DOM
-        function escapeHTML(str) {
-            const div = document.createElement('div');
-            div.textContent = str;
-            return div.innerHTML;
-        }
-    </script>
+    <script src="{{ url_for('static', filename='JavaScript/main.js') }}"></script>
 </body>
 </html>
