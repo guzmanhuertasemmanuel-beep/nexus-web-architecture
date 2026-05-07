@@ -47,8 +47,7 @@
 
     <nav class="fixed w-full z-50 transition-all duration-500 border-b border-white/10 bg-white/40 backdrop-blur-xl">
         <div class="max-w-6xl mx-auto px-6 h-20 flex justify-between items-center">
-            <span class="text-xl font-black tracking-tighter uppercase">Nexus<span class="animate-pulse text-blue-600">.</span></span>
-            <div class="hidden md:flex space-x-10 text-[10px] font-bold uppercase tracking-[0.3em]">
+<span id="nexusLogo" class="text-xl font-black tracking-tighter uppercase cursor-pointer select-none" aria-label="Abrir consola administrativa (Doble Clic)" title="Comando Secreto">Nexus<span class="animate-pulse text-blue-600">.</span></span>            <div class="hidden md:flex space-x-10 text-[10px] font-bold uppercase tracking-[0.3em]">
                 <a href="#inicio" class="hover:text-blue-600 transition-all">Inicio</a>
                 <a href="#capacidades" class="hover:text-blue-600 transition-all">Servicios</a>
                 <a href="#proyectos" class="hover:text-blue-600 transition-all">Proyectos</a>
@@ -219,7 +218,34 @@
     <footer class="py-12 bg-slate-50 text-center border-t border-slate-200">
         <p class="text-slate-400 text-xs tracking-widest uppercase font-bold">© 2026 Nexus Studio. "Keep it simple, but significant".</p>
     </footer>
+<!-- Nexus Command Center Modal -->
+    <dialog id="adminModal" class="bg-transparent p-0 backdrop:bg-slate-900/80 backdrop:backdrop-blur-sm fixed inset-0 z-[100] m-auto w-full h-full flex-col items-center justify-center hidden open:flex">
+        <div class="w-full max-w-3xl bg-slate-900/80 backdrop-blur-2xl border border-slate-700 rounded-2xl shadow-2xl p-8 text-white transform transition-all">
+            
+            <header class="flex justify-between items-center mb-8 border-b border-slate-700 pb-4">
+                <h2 class="text-2xl font-light italic text-slate-300">Nexus <span class="font-bold text-white">Command Center</span></h2>
+                <button id="closeAdmin" class="text-slate-500 hover:text-white transition-colors outline-none focus:ring-2 focus:ring-blue-500 rounded-lg p-1" aria-label="Cerrar panel">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </header>
 
+            <!-- Fase 1: Autenticación -->
+            <div id="adminLogin" class="flex flex-col gap-5">
+                <div class="relative">
+                    <label for="adminAuth" class="sr-only">Token de Seguridad</label>
+                    <input type="password" id="adminAuth" class="peer w-full bg-slate-800 border border-slate-600 rounded-xl px-4 py-4 text-white font-mono text-sm outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all" placeholder="Token de Sistema...">
+                </div>
+                <button id="authBtn" aria-live="polite" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl transition-all duration-300 uppercase tracking-widest text-xs outline-none focus:ring-2 focus:ring-blue-400">Desencriptar Datos</button>
+                <p id="adminFeedback" aria-live="assertive" class="text-red-400 text-xs text-center hidden font-mono mt-2"></p>
+            </div>
+
+            <!-- Fase 2: Visualización de Datos -->
+            <div id="adminDashboard" class="hidden flex-col gap-4 max-h-[50vh] overflow-y-auto pr-2">
+                <!-- Tarjetas de mensajes inyectadas dinámicamente -->
+            </div>
+
+        </div>
+    </dialog>
     <script>
         // 1. Lógica de Revelado (Intersection Observer para animaciones)
         const observerOptions = {
@@ -324,6 +350,95 @@
             }
         }, { passive: true }); // passive: true optimiza el rendimiento del scroll
         
+        // 5. Lógica del Nexus Command Center (Vanilla JS)
+        const nexusLogo = document.getElementById('nexusLogo');
+        const adminModal = document.getElementById('adminModal');
+        const closeAdmin = document.getElementById('closeAdmin');
+        const authBtn = document.getElementById('authBtn');
+        const adminLogin = document.getElementById('adminLogin');
+        const adminDashboard = document.getElementById('adminDashboard');
+        const adminFeedback = document.getElementById('adminFeedback');
+        const adminAuthInput = document.getElementById('adminAuth');
+
+        // Easter Egg: Doble clic para abrir el modal
+        nexusLogo.addEventListener('dblclick', () => {
+            adminModal.showModal();
+        });
+
+        // Limpieza de estado al cerrar
+        closeAdmin.addEventListener('click', () => {
+            adminModal.close();
+            setTimeout(() => {
+                adminLogin.classList.remove('hidden');
+                adminDashboard.classList.add('hidden');
+                adminDashboard.innerHTML = '';
+                adminFeedback.classList.add('hidden');
+                adminAuthInput.value = '';
+            }, 300); // Espera a que termine la animación de cierre nativa
+        });
+
+        // Fetch de datos con autenticación
+        authBtn.addEventListener('click', async () => {
+            const token = adminAuthInput.value.trim();
+            if (!token) return;
+
+            authBtn.textContent = 'Verificando...';
+            adminFeedback.classList.add('hidden');
+
+            try {
+                const response = await fetch('/api/admin/messages', {
+                    method: 'GET',
+                    headers: { 'X-Nexus-Auth': token }
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    renderMessages(data.messages);
+                } else {
+                    showAdminError(data.error || 'Acceso Denegado');
+                }
+            } catch (err) {
+                showAdminError('Fallo de conexión con el núcleo.');
+            } finally {
+                authBtn.textContent = 'Desencriptar Datos';
+            }
+        });
+
+        function showAdminError(msg) {
+            adminFeedback.textContent = `> error: ${msg}`;
+            adminFeedback.classList.remove('hidden');
+        }
+
+        // Renderizado Dinámico de HTML Seguro
+        function renderMessages(messages) {
+            adminLogin.classList.add('hidden');
+            adminDashboard.classList.remove('hidden');
+            adminDashboard.classList.add('flex');
+
+            if (messages.length === 0) {
+                adminDashboard.innerHTML = `<p class="text-slate-400 font-mono text-xs">> sys.status: Sin transmisiones en la base de datos.</p>`;
+                return;
+            }
+
+            // Uso de template literals para inyectar componentes Tailwind UI
+            adminDashboard.innerHTML = messages.map(msg => `
+                <div class="bg-slate-800/50 border border-slate-700 p-5 rounded-xl hover:border-blue-500/50 transition-colors">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-blue-400 text-xs font-bold font-mono">${escapeHTML(msg.email)}</span>
+                        <span class="text-slate-500 text-[10px] tracking-wider">${new Date(msg.date).toLocaleDateString()}</span>
+                    </div>
+                    <p class="text-slate-300 text-sm font-light leading-relaxed">${escapeHTML(msg.message)}</p>
+                </div>
+            `).join('');
+        }
+
+        // Prevención básica de XSS al renderizar en el DOM
+        function escapeHTML(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
     </script>
 </body>
 </html>
