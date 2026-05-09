@@ -1,48 +1,131 @@
-# \# 🚀 Nexus | Minimalist Web Architecture
+# Nexus: Arquitectura Web de Alto Rendimiento
 
-# 
+Nexus es una plataforma de visualización y gestión de información técnica diseñada bajo un paradigma de arquitectura elástica y minimalismo funcional. El proyecto resuelve la fragmentación en la presentación de datos técnicos mediante una interfaz inmersiva que utiliza aceleración por hardware para garantizar una experiencia de usuario fluida a 60 FPS.
 
-# Este es un proyecto de desarrollo web de alto nivel diseñado con una estética minimalista y una arquitectura de backend robusta. Creado como una demostración de buenas prácticas de ingeniería de software.
+## Tabla de contenidos
 
-# 
+1. [Descripción](https://www.google.com/search?q=%23descripci%C3%B3n)
+2. [Estado del proyecto](https://www.google.com/search?q=%23estado-del-proyecto)
+3. [Instalación](https://www.google.com/search?q=%23instalaci%C3%B3n)
+4. [Uso](https://www.google.com/search?q=%23uso)
+5. [Configuración](https://www.google.com/search?q=%23configuraci%C3%B3n)
+6. [Contribución](https://www.google.com/search?q=%23contribuci%C3%B3n)
+7. [Licencia](https://www.google.com/search?q=%23licencia)
+8. [Créditos](https://www.google.com/search?q=%23cr%C3%A9ditos)
 
-# \## 🌟 Características Principales
 
-# \- \*\*Diseño Premium:\*\* Estética minimalista con efectos de \*\*Glassmorphism\*\* y animaciones fluidas.
+## Descripción
 
-# \- \*\*Arquitectura SRP:\*\* Backend en Python (Flask) separado en controladores y servicios (Single Responsibility Principle).
+Nexus implementa un ecosistema hiperconectado donde el hardware y el software convergen de manera invisible. El sistema destaca por las siguientes características fundamentales:
 
-# \- \*\*Validación Automática (CI):\*\* Integración continua mediante \*\*GitHub Actions\*\* que audita el código en cada cambio.
+* **Motor de Scroll-Telling:** Animaciones vinculadas al progreso del scroll mediante variables CSS y `requestAnimationFrame` para optimización de GPU.
+* **Gestión de Nodos IT:** Un sistema dinámico basado en SQLite que permite la exploración aleatoria de conceptos tecnológicos como DevOps, Cloud Computing e Inteligencia Artificial.
+* **Arquitectura Modular:** Separación estricta de responsabilidades (SRP) entre controladores de ruta en `app.py` y lógica de negocio en `services.py`.
+* **Interfaz Glassmorphism:** Diseño visual basado en Tailwind CSS con efectos de desenfoque de fondo y bordes de alta definición adaptados a estándares de accesibilidad.
 
-# \- \*\*Rendimiento:\*\* Optimización de carga de imágenes (Lazy Loading) y diseño Mobile First.
+## Estado del proyecto
 
-# 
+El proyecto se encuentra en fase estable, con un pipeline de Integración Continua activo que valida la calidad del código mediante `flake8` y verificaciones estructurales de HTML.
 
-# \## 🛠️ Tecnologías Utilizadas
+## Instalación
 
-# \- \*\*Frontend:\*\* HTML5, Tailwind CSS, JavaScript (ES6+).
+### Requisitos previos
 
-# \- \*\*Backend:\*\* Python 3.x, Flask.
+* **Python:** Versión 3.9 o superior.
+* **pip:** Gestor de paquetes de Python actualizado.
+* **SQLite3:** Incluido por defecto en la instalación de Python.
 
-# \- \*\*DevOps:\*\* GitHub Actions (CI Pipeline).
+### Comandos de instalación
 
-# 
+1. **Clonación del repositorio:**
+```bash
+git clone https://github.com/usuario/nexus-architecture.git
+cd nexus-architecture
 
-# \## 🚦 Estado del Proyecto
+```
 
-# !\[CI Nexus Pipeline](https://github.com/TU\_USUARIO/TU\_REPO/actions/workflows/main.yml/badge.svg)
 
-# > \*El badge de arriba indica si la última versión del código pasó todas las pruebas de calidad.\*
+2. **Configuración del entorno virtual:**
+```bash
+python -m venv venv
+source venv/bin/activate  # En sistemas Windows: venv\Scripts\activate
 
-# 
+```
 
-# \## 💻 Instalación y Uso Local
 
-# 
+3. **Instalación de dependencias:**
+```bash
+pip install flask flake8
 
-# 1\. \*\*Clonar el repositorio:\*\*
+```
 
-# &#x20;  ```bash
 
-# &#x20;  git clone \[https://github.com/TU\_USUARIO/TU\_REPO.git](https://github.com/TU\_USUARIO/TU\_REPO.git)
 
+### Variables de entorno
+
+Para el funcionamiento del módulo administrativo, es necesario configurar el encabezado de autenticación:
+
+* `X-Nexus-Auth`: Token de seguridad requerido para el acceso a la API de mensajes (Valor predeterminado en desarrollo: `NEXUS_SECURE_2026`).
+
+## Uso
+
+### Ejecución del servidor de desarrollo
+
+Para iniciar la aplicación en un entorno local, ejecute el siguiente comando desde la raíz del proyecto:
+
+```bash
+python app.py
+
+```
+
+La aplicación estará disponible en `http://127.0.0.1:5000`.
+
+### Ejemplos de integración de API
+
+**Envío de mensaje de contacto:**
+
+```javascript
+// Ejemplo de consumo de API interna mediante Fetch
+async function submitContact(email, message) {
+    const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, message })
+    });
+    return await response.json();
+}
+
+```
+
+### Casos de uso comunes
+
+* **Exploración de Nodos:** Acceso a la ruta `/explore/random` para redirección automática a nodos de conocimiento técnico.
+* **Gestión Administrativa:** Consulta de mensajes recibidos mediante peticiones autenticadas al endpoint `/api/admin/messages`.
+
+## Configuración
+
+El proyecto permite personalización a través de los siguientes archivos:
+
+1. **`services.py`:** Modificación de la lógica de persistencia y esquemas de base de datos iniciales para la tabla `nexus_nodes`.
+2. **`style.css`:** Ajuste de curvas de transición (`cubic-bezier`) y variables de diseño estilo Apple.
+3. **`main.yml`:** Configuración de las ramas de despliegue y reglas de linting para el pipeline de GitHub Actions.
+
+## Contribución
+
+Se invita a la comunidad a colaborar siguiendo estos lineamientos técnicos:
+
+1. Realizar un **Fork** del repositorio.
+2. Crear una rama para la nueva funcionalidad (`git checkout -b feature/nueva-funcionalidad`).
+3. Asegurar el cumplimiento de las normas **PEP 8** mediante la ejecución de `flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics`.
+4. Mantener la semántica HTML y el uso de atributos ARIA para accesibilidad nivel AA.
+5. Enviar un **Pull Request** detallando los cambios y su impacto en la arquitectura.
+
+## Licencia
+
+Este proyecto está bajo la Licencia MIT. Para más detalles, consulte el archivo `LICENSE` en la raíz del repositorio.
+
+## Créditos
+
+* **Desarrollo Core:** Nexus Architecture Team.
+* **Frameworks:** Flask (Backend) y Tailwind CSS (Estilos).
+* **Recursos:** Documentación de MDN Web Docs para estándares de API y animaciones CSS.
